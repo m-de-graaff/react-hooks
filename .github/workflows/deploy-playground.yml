@@ -47,4 +47,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./playground/dist
           cname: false
+          keep_files: false
 
