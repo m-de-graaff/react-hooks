@@ -66,13 +66,17 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  box-shadow:
+    0 1px 3px 0 rgb(0 0 0 / 0.1),
+    0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
 .source-button:hover {
   background: hsl(217 91% 70%);
   transform: translateY(-1px);
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 .hook-demo-content {
@@ -85,7 +89,9 @@
   border-radius: var(--radius);
   padding: 2rem;
   margin-top: 2rem;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  box-shadow:
+    0 1px 3px 0 rgb(0 0 0 / 0.1),
+    0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
 .hook-demo-install h3 {
@@ -99,7 +105,7 @@
 }
 
 .hook-demo-install h3::before {
-  content: '';
+  content: "";
   width: 4px;
   height: 1.125rem;
   background: hsl(217 91% 60%);
@@ -125,7 +131,7 @@
 }
 
 .install-code::before {
-  content: '$';
+  content: "$";
   color: hsl(var(--muted-foreground));
   margin-right: 0.5rem;
 }
@@ -159,13 +165,17 @@
   border-radius: calc(var(--radius) - 2px);
   font-weight: 600;
   transition: all 0.2s;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  box-shadow:
+    0 1px 3px 0 rgb(0 0 0 / 0.1),
+    0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
 .hook-demo-error a:hover {
   background: hsl(217 91% 70%);
   transform: translateY(-1px);
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 @media (max-width: 768px) {

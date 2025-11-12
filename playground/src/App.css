@@ -6,7 +6,6 @@
 }
 
 .app-header {
-  background: hsl(var(--card));
   border-bottom: 1px solid hsl(var(--border));
   padding: 1rem 0;
   position: sticky;
@@ -14,7 +13,9 @@
   z-index: 100;
   backdrop-filter: blur(10px);
   background: hsl(var(--card) / 0.8);
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  box-shadow:
+    0 1px 3px 0 rgb(0 0 0 / 0.1),
+    0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
 .app-header .container {
@@ -51,6 +52,17 @@
   align-items: center;
 }
 
+.app-footer a {
+  color: hsl(217 91% 60%);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.app-footer a:hover {
+  color: hsl(217 91% 70%);
+  text-decoration: underline;
+}
+
 .app-header nav a {
   text-decoration: none;
   color: hsl(var(--muted-foreground));
@@ -70,17 +82,6 @@
 .app-header nav a.active {
   color: hsl(var(--foreground));
   background: hsl(var(--accent));
-}
-
-.app-footer a {
-  color: hsl(217 91% 60%);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.app-footer a:hover {
-  color: hsl(217 91% 70%);
-  text-decoration: underline;
 }
 
 .app-main {

@@ -1,6 +1,6 @@
+import type { PrismTheme } from 'prism-react-renderer';
 import * as React from 'react';
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
-import type { PrismTheme } from 'prism-react-renderer';
 // Import hooks directly from source
 import {
   useBattery,

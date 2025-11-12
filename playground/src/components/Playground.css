@@ -15,7 +15,9 @@
   border: 1px solid hsl(var(--border));
   border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 .playground-editor-header,
@@ -34,7 +36,7 @@
 }
 
 .playground-editor-header::before {
-  content: '';
+  content: "";
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -43,7 +45,7 @@
 }
 
 .playground-preview-header::before {
-  content: '';
+  content: "";
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -62,8 +64,8 @@
 }
 
 .playground-editor-content textarea {
-  background: transparent !important;
-  color: hsl(var(--foreground)) !important;
+  background: transparent;
+  color: hsl(var(--foreground));
   caret-color: hsl(217 91% 60%);
 }
 
@@ -73,15 +75,15 @@
 
 /* Override react-live styles for dark theme */
 .playground-editor-content pre {
-  background: hsl(var(--background)) !important;
-  color: hsl(var(--foreground)) !important;
-  padding: 1.25rem !important;
-  margin: 0 !important;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  padding: 1.25rem;
+  margin: 0;
 }
 
 .playground-editor-content pre code {
-  background: transparent !important;
-  color: hsl(var(--foreground)) !important;
+  background: transparent;
+  color: hsl(var(--foreground));
 }
 
 .playground-preview-content {

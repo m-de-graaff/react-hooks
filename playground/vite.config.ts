@@ -1,7 +1,7 @@
+import { copyFileSync } from 'node:fs';
+import { join } from 'node:path';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
-import { copyFileSync } from 'fs';
-import { join } from 'path';
 
 export default defineConfig({
   base: '/react-hooks/',
@@ -11,10 +11,7 @@ export default defineConfig({
       name: 'copy-nojekyll',
       closeBundle() {
         // Copy .nojekyll to dist after build
-        copyFileSync(
-          join(__dirname, '.nojekyll'),
-          join(__dirname, 'dist', '.nojekyll')
-        );
+        copyFileSync(join(__dirname, '.nojekyll'), join(__dirname, 'dist', '.nojekyll'));
       },
     },
   ],
