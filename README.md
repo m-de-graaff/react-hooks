@@ -24,17 +24,156 @@ pnpm add @m-de-graaff/react-hooks
 ## 🚀 Usage
 
 ```typescript
-import { /* your hooks */ } from '@m-de-graaff/react-hooks';
+import { useToggle, useDocumentTitle } from '@m-de-graaff/react-hooks';
 
 function MyComponent() {
-  // Use your custom hooks here
-  return <div>Your component</div>;
+  const [isOpen, toggle] = useToggle(false);
+  useDocumentTitle(isOpen ? 'Open' : 'Closed');
+
+  return (
+    <div>
+      <button onClick={toggle}>
+        {isOpen ? 'Close' : 'Open'}
+      </button>
+    </div>
+  );
 }
 ```
 
 ## 📚 Available Hooks
 
-_Documentation for your custom hooks will go here._
+### `useCopyToClipboard`
+
+Copy text to the clipboard with state tracking.
+
+```typescript
+import { useCopyToClipboard } from '@m-de-graaff/react-hooks';
+
+function MyComponent() {
+  const [copiedText, copyToClipboard] = useCopyToClipboard();
+
+  const handleCopy = async () => {
+    await copyToClipboard("Hello World");
+    // copiedText will be "Hello World" after successful copy
+  };
+
+  return (
+    <button onClick={handleCopy}>
+      {copiedText ? `Copied: ${copiedText}` : 'Copy to Clipboard'}
+    </button>
+  );
+}
+```
+
+### `useDefault`
+
+Set a default value for a component when the initial value is null or undefined.
+
+```typescript
+import { useDefault } from '@m-de-graaff/react-hooks';
+
+function MyComponent() {
+  const [value, updateValue] = useDefault({ 
+    initialValue: null, 
+    defaultValue: "Default Value" 
+  });
+
+  return (
+    <div>
+      <p>Value: {value}</p>
+      <button onClick={() => updateValue("New Value")}>Update</button>
+      <button onClick={() => updateValue(null)}>Reset</button>
+    </div>
+  );
+}
+```
+
+### `useDocumentTitle`
+
+Set the document title dynamically.
+
+```typescript
+import { useDocumentTitle } from '@m-de-graaff/react-hooks';
+
+function MyComponent() {
+  useDocumentTitle("My Page Title");
+
+  return <div>Content</div>;
+}
+```
+
+### `useFavicon`
+
+Set the favicon of the document dynamically.
+
+```typescript
+import { useFavicon } from '@m-de-graaff/react-hooks';
+
+function MyComponent() {
+  useFavicon("/favicon.ico");
+
+  return <div>Content</div>;
+}
+```
+
+### `usePreferredLanguage`
+
+Get the user's preferred language from the browser.
+
+```typescript
+import { usePreferredLanguage } from '@m-de-graaff/react-hooks';
+
+function MyComponent() {
+  const language = usePreferredLanguage();
+  // Returns the browser's preferred language (e.g., "en-US", "fr-FR")
+
+  return <div>Preferred Language: {language}</div>;
+}
+```
+
+### `usePrevious`
+
+Get the previous value of a variable.
+
+```typescript
+import { useState } from 'react';
+import { usePrevious } from '@m-de-graaff/react-hooks';
+
+function MyComponent() {
+  const [count, setCount] = useState(0);
+  const previousCount = usePrevious(count);
+  // previousCount will be the value of count from the previous render
+
+  return (
+    <div>
+      <p>Current: {count}</p>
+      <p>Previous: {previousCount ?? 'N/A'}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+### `useToggle`
+
+Toggle a boolean value with optional setter.
+
+```typescript
+import { useToggle } from '@m-de-graaff/react-hooks';
+
+function MyComponent() {
+  const [isToggled, toggle] = useToggle(false);
+
+  return (
+    <div>
+      <p>Status: {isToggled ? 'On' : 'Off'}</p>
+      <button onClick={() => toggle()}>Toggle</button>
+      <button onClick={() => toggle(true)}>Set to True</button>
+      <button onClick={() => toggle(false)}>Set to False</button>
+    </div>
+  );
+}
+```
 
 ## 🛠️ Development
 
