@@ -7,7 +7,11 @@ import useInterval from './useInterval';
 import useLockBodyScroll from './useLockBodyScroll';
 import usePreferredLanguage from './usePreferredLanguage';
 import usePrevious from './usePrevious';
+import useQueue from './useQueue';
+import useTimeout from './useTimeout';
 import useToggle from './useToggle';
+import useVisibilityChange from './useVisibilityChange';
+import useWindowSize from './useWindowSize';
 
 export {
   useCopyToClipboard,
@@ -19,5 +23,9 @@ export {
   useLockBodyScroll,
   usePreferredLanguage,
   usePrevious,
+  useQueue,
+  useTimeout,
   useToggle,
+  useVisibilityChange,
+  useWindowSize,
 };

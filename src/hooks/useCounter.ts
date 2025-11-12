@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 interface UseCounterOptions {
   min?: number;
@@ -27,22 +27,15 @@ type UseCounterReturn = readonly [number, UseCounterControls];
  * set(5); // Sets count to 5 (respects min/max bounds)
  * reset(); // Resets count to startingValue
  */
-function useCounter(
-  startingValue: number = 0,
-  options: UseCounterOptions = {}
-): UseCounterReturn {
+function useCounter(startingValue: number = 0, options: UseCounterOptions = {}): UseCounterReturn {
   const { min, max } = options;
 
   if (typeof min === 'number' && startingValue < min) {
-    throw new Error(
-      `Your starting value of ${startingValue} is less than your min of ${min}.`
-    );
+    throw new Error(`Your starting value of ${startingValue} is less than your min of ${min}.`);
   }
 
   if (typeof max === 'number' && startingValue > max) {
-    throw new Error(
-      `Your starting value of ${startingValue} is greater than your max of ${max}.`
-    );
+    throw new Error(`Your starting value of ${startingValue} is greater than your max of ${max}.`);
   }
 
   const [count, setCount] = useState<number>(startingValue);
@@ -61,31 +54,36 @@ function useCounter(
     });
   }, [min]);
 
-  const set = useCallback((nextState: number): void => {
-    setCount((prev) => {
-      if (
-        (typeof min === 'number' && nextState < min) ||
-        (typeof max === 'number' && nextState > max)
-      ) {
-        return prev;
-      }
-      return nextState;
-    });
-  }, [min, max]);
+  const set = useCallback(
+    (nextState: number): void => {
+      setCount((prev) => {
+        if (
+          (typeof min === 'number' && nextState < min) ||
+          (typeof max === 'number' && nextState > max)
+        ) {
+          return prev;
+        }
+        return nextState;
+      });
+    },
+    [min, max]
+  );
 
   const reset = useCallback((): void => {
     setCount(startingValue);
   }, [startingValue]);
 
-  return [
-    count,
-    {
+  const controls = useMemo<UseCounterControls>(
+    () => ({
       increment,
       decrement,
       set,
       reset,
-    },
-  ] as const;
+    }),
+    [increment, decrement, set, reset]
+  );
+
+  return [count, controls] as const;
 }
 
 export default useCounter;
