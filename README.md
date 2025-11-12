@@ -5,7 +5,7 @@
 
 A collection of custom React hooks built from the [react.gg](https://react.gg) course and personal utilities.
 
-## 📦 Installation
+## Installation
 
 ```bash
 npm install @m-de-graaff/react-hooks
@@ -21,33 +21,31 @@ yarn add @m-de-graaff/react-hooks
 pnpm add @m-de-graaff/react-hooks
 ```
 
-## 🚀 Usage
+## Usage
 
 ```typescript
-import { useToggle, useDocumentTitle } from '@m-de-graaff/react-hooks';
+import { useToggle, useDocumentTitle } from "@m-de-graaff/react-hooks";
 
 function MyComponent() {
   const [isOpen, toggle] = useToggle(false);
-  useDocumentTitle(isOpen ? 'Open' : 'Closed');
+  useDocumentTitle(isOpen ? "Open" : "Closed");
 
   return (
     <div>
-      <button onClick={toggle}>
-        {isOpen ? 'Close' : 'Open'}
-      </button>
+      <button onClick={toggle}>{isOpen ? "Close" : "Open"}</button>
     </div>
   );
 }
 ```
 
-## 📚 Available Hooks
+## Available Hooks
 
 ### `useCopyToClipboard`
 
 Copy text to the clipboard with state tracking.
 
 ```typescript
-import { useCopyToClipboard } from '@m-de-graaff/react-hooks';
+import { useCopyToClipboard } from "@m-de-graaff/react-hooks";
 
 function MyComponent() {
   const [copiedText, copyToClipboard] = useCopyToClipboard();
@@ -57,11 +55,7 @@ function MyComponent() {
     // copiedText will be "Hello World" after successful copy
   };
 
-  return (
-    <button onClick={handleCopy}>
-      {copiedText ? `Copied: ${copiedText}` : 'Copy to Clipboard'}
-    </button>
-  );
+  return <button onClick={handleCopy}>{copiedText ? `Copied: ${copiedText}` : "Copy to Clipboard"}</button>;
 }
 ```
 
@@ -70,12 +64,12 @@ function MyComponent() {
 Set a default value for a component when the initial value is null or undefined.
 
 ```typescript
-import { useDefault } from '@m-de-graaff/react-hooks';
+import { useDefault } from "@m-de-graaff/react-hooks";
 
 function MyComponent() {
-  const [value, updateValue] = useDefault({ 
-    initialValue: null, 
-    defaultValue: "Default Value" 
+  const [value, updateValue] = useDefault({
+    initialValue: null,
+    defaultValue: "Default Value",
   });
 
   return (
@@ -93,7 +87,7 @@ function MyComponent() {
 Set the document title dynamically.
 
 ```typescript
-import { useDocumentTitle } from '@m-de-graaff/react-hooks';
+import { useDocumentTitle } from "@m-de-graaff/react-hooks";
 
 function MyComponent() {
   useDocumentTitle("My Page Title");
@@ -107,7 +101,7 @@ function MyComponent() {
 Set the favicon of the document dynamically.
 
 ```typescript
-import { useFavicon } from '@m-de-graaff/react-hooks';
+import { useFavicon } from "@m-de-graaff/react-hooks";
 
 function MyComponent() {
   useFavicon("/favicon.ico");
@@ -121,7 +115,7 @@ function MyComponent() {
 Get the user's preferred language from the browser.
 
 ```typescript
-import { usePreferredLanguage } from '@m-de-graaff/react-hooks';
+import { usePreferredLanguage } from "@m-de-graaff/react-hooks";
 
 function MyComponent() {
   const language = usePreferredLanguage();
@@ -136,8 +130,8 @@ function MyComponent() {
 Get the previous value of a variable.
 
 ```typescript
-import { useState } from 'react';
-import { usePrevious } from '@m-de-graaff/react-hooks';
+import { useState } from "react";
+import { usePrevious } from "@m-de-graaff/react-hooks";
 
 function MyComponent() {
   const [count, setCount] = useState(0);
@@ -147,7 +141,7 @@ function MyComponent() {
   return (
     <div>
       <p>Current: {count}</p>
-      <p>Previous: {previousCount ?? 'N/A'}</p>
+      <p>Previous: {previousCount ?? "N/A"}</p>
       <button onClick={() => setCount(count + 1)}>Increment</button>
     </div>
   );
@@ -159,14 +153,14 @@ function MyComponent() {
 Toggle a boolean value with optional setter.
 
 ```typescript
-import { useToggle } from '@m-de-graaff/react-hooks';
+import { useToggle } from "@m-de-graaff/react-hooks";
 
 function MyComponent() {
   const [isToggled, toggle] = useToggle(false);
 
   return (
     <div>
-      <p>Status: {isToggled ? 'On' : 'Off'}</p>
+      <p>Status: {isToggled ? "On" : "Off"}</p>
       <button onClick={() => toggle()}>Toggle</button>
       <button onClick={() => toggle(true)}>Set to True</button>
       <button onClick={() => toggle(false)}>Set to False</button>
@@ -175,7 +169,7 @@ function MyComponent() {
 }
 ```
 
-## 🛠️ Development
+## Development
 
 ### Prerequisites
 
@@ -210,7 +204,7 @@ src/
 └── index.ts        # Main entry point
 ```
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
@@ -221,18 +215,19 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 5. Open a Pull Request
 
 Please make sure to:
+
 - Follow the existing code style (enforced by Biome)
 - Add tests for new features
 - Update documentation as needed
 
-## 📄 License
+## License
 
 MIT © m-de-graaff - see the [LICENSE.md](LICENSE.md) file for details.
 
-## 🔒 Security
+## Security
 
 For security concerns, please see [SECURITY.md](SECURITY.md).
 
-## 📝 Changelog
+## Changelog
 
 See [Releases](https://github.com/m-de-graaff/react-hooks/releases) for a list of changes.
