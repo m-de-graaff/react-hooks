@@ -1,0 +1,40 @@
+{
+  "name": "@m-de-graaff/react-hooks",
+  "version": "0.1.0",
+  "description": "Custom React hooks collection from react.gg course and personal utilities",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc && tsc --project tsconfig.esm.json",
+    "format": "biome format --write .",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "react-hooks",
+    "typescript",
+    "custom-hooks"
+  ],
+  "author": "m-de-graaff",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.5",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.3",
+    "typescript": "^5.9.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/m-de-graaff/react-hooks.git"
+  }
+}
