@@ -10,6 +10,7 @@ A collection of custom React hooks built from the [react.gg](https://react.gg) c
 **Try all hooks live in your browser!**
 
 Visit the [Interactive Playground](https://m-de-graaff.github.io/react-hooks/) to:
+
 - Browse all available hooks
 - See live, editable demos
 - Experiment with code in real-time
@@ -62,12 +63,7 @@ function MyComponent() {
 Starting with `1.0.0-next`, the package includes dedicated Next.js cache helpers under the `/next` subpath. These utilities are compiled for both Node/Edge runtimes and ship full type definitions.
 
 ```typescript
-import {
-  nextCache,
-  useCacheStatus,
-  useCachePrefetch,
-  useCacheWarmup,
-} from "@m-de-graaff/react-hooks/next";
+import { nextCache, useCacheStatus, useCachePrefetch, useCacheWarmup } from "@m-de-graaff/react-hooks/next";
 
 export async function getPosts() {
   "use cache";
@@ -220,9 +216,13 @@ Continuously retry a callback function at a specified interval until it succeeds
 import { useContinuousRetry } from "@m-de-graaff/react-hooks";
 
 function MyComponent() {
-  const hasResolved = useContinuousRetry(() => {
-    return document.getElementById('my-element') !== null;
-  }, 100, { maxRetries: 50 });
+  const hasResolved = useContinuousRetry(
+    () => {
+      return document.getElementById("my-element") !== null;
+    },
+    100,
+    { maxRetries: 50 }
+  );
   // Retries every 100ms until element exists or 50 retries reached
 
   return <div>{hasResolved ? "Element found!" : "Searching..."}</div>;
@@ -260,17 +260,11 @@ import { useState } from "react";
 import { useDebounce } from "@m-de-graaff/react-hooks";
 
 function MyComponent() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
   // debouncedSearchTerm will only update 500ms after searchTerm stops changing
 
-  return (
-    <input
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-      placeholder="Search..."
-    />
-  );
+  return <input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search..." />;
 }
 ```
 
@@ -285,12 +279,12 @@ import { useEventListener } from "@m-de-graaff/react-hooks";
 function MyComponent() {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  useEventListener(window, 'resize', (event) => {
-    console.log('Window resized', event);
+  useEventListener(window, "resize", (event) => {
+    console.log("Window resized", event);
   });
 
-  useEventListener(buttonRef, 'click', (event) => {
-    console.log('Button clicked', event);
+  useEventListener(buttonRef, "click", (event) => {
+    console.log("Button clicked", event);
   });
 
   return <button ref={buttonRef}>Click me</button>;
@@ -311,8 +305,12 @@ function MyComponent() {
     <div>
       <p>Value: {state}</p>
       <button onClick={() => set((state ?? 0) + 1)}>Increment</button>
-      <button onClick={undo} disabled={!canUndo}>Undo</button>
-      <button onClick={redo} disabled={!canRedo}>Redo</button>
+      <button onClick={undo} disabled={!canUndo}>
+        Undo
+      </button>
+      <button onClick={redo} disabled={!canRedo}>
+        Redo
+      </button>
       <button onClick={clear}>Clear</button>
     </div>
   );
@@ -348,7 +346,7 @@ function MyComponent() {
 
   return (
     <div>
-      <p>List: {list.join(', ')}</p>
+      <p>List: {list.join(", ")}</p>
       <button onClick={() => push(4, 5)}>Add 4, 5</button>
       <button onClick={() => removeAt(0)}>Remove First</button>
       <button onClick={() => insertAt(1, 99)}>Insert 99 at index 1</button>
@@ -404,17 +402,15 @@ Manage object state with automatic merging (similar to React class component set
 import { useObjectState } from "@m-de-graaff/react-hooks";
 
 function MyComponent() {
-  const [state, updateState] = useObjectState({ name: 'John', age: 30 });
+  const [state, updateState] = useObjectState({ name: "John", age: 30 });
 
   return (
     <div>
-      <p>Name: {state.name}, Age: {state.age}</p>
-      <button onClick={() => updateState({ age: 31 })}>
-        Update Age
-      </button>
-      <button onClick={() => updateState((prev) => ({ age: (prev.age ?? 0) + 1 }))}>
-        Increment Age
-      </button>
+      <p>
+        Name: {state.name}, Age: {state.age}
+      </p>
+      <button onClick={() => updateState({ age: 31 })}>Update Age</button>
+      <button onClick={() => updateState((prev) => ({ age: (prev.age ?? 0) + 1 }))}>Increment Age</button>
     </div>
   );
 }
@@ -432,8 +428,10 @@ function MyComponent() {
 
   return (
     <div>
-      <p>Queue: {queue.join(', ')}</p>
-      <p>First: {first ?? 'N/A'}, Last: {last ?? 'N/A'}, Size: {size}</p>
+      <p>Queue: {queue.join(", ")}</p>
+      <p>
+        First: {first ?? "N/A"}, Last: {last ?? "N/A"}, Size: {size}
+      </p>
       <button onClick={() => add(4)}>Add 4</button>
       <button onClick={() => remove()}>Remove First</button>
       <button onClick={clear}>Clear</button>
@@ -450,9 +448,12 @@ Run a callback function at random intervals between minDelay and maxDelay.
 import { useRandomInterval } from "@m-de-graaff/react-hooks";
 
 function MyComponent() {
-  const clearInterval = useRandomInterval(() => {
-    console.log("Random tick");
-  }, { minDelay: 1000, maxDelay: 5000 });
+  const clearInterval = useRandomInterval(
+    () => {
+      console.log("Random tick");
+    },
+    { minDelay: 1000, maxDelay: 5000 }
+  );
   // Clear the interval manually if needed: clearInterval();
 
   return <div>Check console for random ticks</div>;
@@ -503,7 +504,9 @@ function MyComponent() {
 
   return (
     <div>
-      <p>Window size: {width} x {height}</p>
+      <p>
+        Window size: {width} x {height}
+      </p>
     </div>
   );
 }
