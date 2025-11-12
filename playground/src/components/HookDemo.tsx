@@ -1,7 +1,7 @@
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { hooks } from '../hooksData';
-import Playground from './Playground';
-import './HookDemo.css';
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { hooks } from "../hooksData";
+import Playground from "./Playground";
+import "./HookDemo.css";
 
 export default function HookDemo() {
   const { hookName } = useParams<{ hookName: string }>();
@@ -48,7 +48,7 @@ export default function HookDemo() {
         <code className="install-code">npm install @m-de-graaff/react-hooks</code>
         <h3>Import</h3>
         <code className="install-code">
-          import {'{'} {hook.name} {'}'} from '@m-de-graaff/react-hooks';
+          import {"{"} {hook.name} {"}"} from '@m-de-graaff/react-hooks';
         </code>
       </div>
     </div>
