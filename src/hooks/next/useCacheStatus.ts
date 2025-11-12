@@ -25,7 +25,10 @@ export interface UseCacheStatusReturn {
  *   await refresh();
  * }
  */
-function useCacheStatus(url: string, options: UseCacheStatusOptions = {}): UseCacheStatusReturn {
+function useCacheStatus(
+  url: string,
+  options: UseCacheStatusOptions = {},
+): UseCacheStatusReturn {
   const { interval = 0 } = options;
   const [status, setStatus] = useState<CacheStatus>('unknown');
   const [lastChecked, setLastChecked] = useState<Date | null>(null);
@@ -90,8 +93,9 @@ function useCacheStatus(url: string, options: UseCacheStatusOptions = {}): UseCa
       lastChecked,
       refresh: checkStatus,
     }),
-    [status, lastChecked, checkStatus]
+    [status, lastChecked, checkStatus],
   );
 }
 
 export default useCacheStatus;
+

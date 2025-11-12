@@ -1,4 +1,10 @@
-import { cacheLife, cacheTag, revalidateTag, updateTag } from 'next/cache';
+import { cacheLife, cacheTag } from 'next/cache';
+
+import {
+  revalidateTags,
+  updateTags,
+  type RevalidateType,
+} from './cacheActions';
 
 export type CachePreset =
   | 'default'
@@ -19,6 +25,7 @@ export interface CacheProfileConfig {
 export interface NextCacheOptions {
   tag?: string | string[];
   profile?: CachePreset | CacheProfileConfig;
+  revalidateType?: RevalidateType;
 }
 
 export interface NextCacheHelpers {
@@ -26,29 +33,33 @@ export interface NextCacheHelpers {
   update: () => Promise<void>;
 }
 
+function normalizeTags(tag?: string | string[]): string[] {
+  if (!tag) {
+    return [];
+  }
+
+  const tags = Array.isArray(tag) ? tag : [tag];
+
+  return Array.from(
+    new Set(
+      tags
+        .map((value) => value.trim())
+        .filter((value) => value.length > 0),
+    ),
+  );
+}
+
 /**
  * Declares cache semantics in one place for a server component or function.
  * Use this at the top of an async function (with `'use cache'` if desired),
  * not inside a React component or hook.
- *
- * @example
- * export async function getPosts() {
- *   'use cache';
- *   const { revalidate, update } = nextCache({ tag: 'posts', profile: 'minutes' });
- *   // ...fetch logic...
- *   return posts;
- * }
  */
 export function nextCache(options: NextCacheOptions = {}): NextCacheHelpers {
-  const { tag, profile } = options;
-  const tags = Array.isArray(tag) ? [...tag] : tag ? [tag] : [];
+  const { tag, profile, revalidateType } = options;
+  const tags = normalizeTags(tag);
 
   if (profile) {
-    if (typeof profile === 'object' && profile !== null) {
-      cacheLife(profile);
-    } else {
-      cacheLife(profile);
-    }
+    cacheLife(profile);
   }
 
   if (tags.length > 0) {
@@ -56,18 +67,18 @@ export function nextCache(options: NextCacheOptions = {}): NextCacheHelpers {
   }
 
   async function revalidate(): Promise<void> {
-    'use server';
-    if (tags.length === 0) return;
-    await Promise.all(tags.map((currentTag) => revalidateTag(currentTag, 'max')));
+    const resolvedType =
+      revalidateType ?? ('max' as unknown as RevalidateType);
+
+    await revalidateTags(tags, resolvedType);
   }
 
   async function update(): Promise<void> {
-    'use server';
-    if (tags.length === 0) return;
-    await Promise.all(tags.map((currentTag) => updateTag(currentTag)));
+    await updateTags(tags);
   }
 
   return { revalidate, update };
 }
 
 export default nextCache;
+

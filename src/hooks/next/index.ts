@@ -1,19 +1,34 @@
-export { default as useCacheStatus } from './useCacheStatus';
-export type {
-  CacheStatus,
-  UseCacheStatusOptions,
-  UseCacheStatusReturn,
+export {
+  revalidateTags,
+  updateTags,
+  type RevalidateType,
+} from './cacheActions';
+
+export {
+  default as nextCache,
+  type NextCacheOptions,
+  type NextCacheHelpers,
+  type CachePreset,
+  type CacheProfileConfig,
+} from './nextCache';
+
+export {
+  default as useCachePrefetch,
+  type UseCachePrefetchOptions,
+  type UseCachePrefetchReturn,
+} from './useCachePrefetch';
+
+export {
+  default as useCacheStatus,
+  type CacheStatus,
+  type UseCacheStatusOptions,
+  type UseCacheStatusReturn,
 } from './useCacheStatus';
 
-export { default as useCachePrefetch } from './useCachePrefetch';
-export type { UseCachePrefetchOptions, UseCachePrefetchReturn } from './useCachePrefetch';
-
-export { default as nextCache } from './nextCache';
-export type { CachePreset, CacheProfileConfig, NextCacheOptions, NextCacheHelpers } from './nextCache';
-
-export { default as useCacheWarmup } from './useCacheWarmup';
-export type {
-  WarmupEndpoint,
-  UseCacheWarmupOptions,
-  UseCacheWarmupReturn,
+export {
+  default as useCacheWarmup,
+  type WarmupEndpoint,
+  type UseCacheWarmupOptions,
+  type UseCacheWarmupReturn,
 } from './useCacheWarmup';
+

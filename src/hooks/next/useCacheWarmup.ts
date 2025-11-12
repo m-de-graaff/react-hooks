@@ -30,7 +30,7 @@ export type UseCacheWarmupReturn = () => Promise<void>;
  */
 export function useCacheWarmup(
   endpoints: WarmupEndpoint[],
-  options: UseCacheWarmupOptions = {}
+  options: UseCacheWarmupOptions = {},
 ): UseCacheWarmupReturn {
   const { once = true } = options;
   const hasRunRef = useRef(false);
@@ -38,33 +38,35 @@ export function useCacheWarmup(
   const warmup = useCallback(async (): Promise<void> => {
     if (!endpoints || endpoints.length === 0) return;
 
-    const tasks = endpoints.map(async ({ url, tags, method = 'GET', body, headers }) => {
-      const tagList = Array.isArray(tags) ? tags : [tags];
-      const payload = body === undefined ? undefined : JSON.stringify(body);
+    const tasks = endpoints.map(
+      async ({ url, tags, method = 'GET', body, headers }) => {
+        const tagList = Array.isArray(tags) ? tags : [tags];
+        const payload = body === undefined ? undefined : JSON.stringify(body);
 
-      const init: RequestInit & { next?: { tags: string[] } } = { method };
+        const init: RequestInit & { next?: { tags: string[] } } = { method };
 
-      if (typeof window !== 'undefined') {
-        init.next = { tags: tagList };
-      }
+        if (typeof window !== 'undefined') {
+          init.next = { tags: tagList };
+        }
 
-      if (payload) {
-        init.body = payload;
-        init.headers = {
-          'Content-Type': 'application/json',
-          ...headers,
-        };
-      } else if (headers) {
-        init.headers = headers;
-      }
+        if (payload) {
+          init.body = payload;
+          init.headers = {
+            'Content-Type': 'application/json',
+            ...headers,
+          };
+        } else if (headers) {
+          init.headers = headers;
+        }
 
-      try {
-        await fetch(url, init);
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.warn('[useCacheWarmup] Failed to warm', url, error);
-      }
-    });
+        try {
+          await fetch(url, init);
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.warn('[useCacheWarmup] Failed to warm', url, error);
+        }
+      },
+    );
 
     await Promise.all(tasks);
   }, [endpoints]);
@@ -82,3 +84,4 @@ export function useCacheWarmup(
 }
 
 export default useCacheWarmup;
+

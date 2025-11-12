@@ -29,7 +29,7 @@ function useCachePrefetch(
     onHover = false,
     threshold = 0.2,
     onPrefetch,
-  }: UseCachePrefetchOptions = {}
+  }: UseCachePrefetchOptions = {},
 ): UseCachePrefetchReturn {
   const router = useRouter();
   const prefetched = useRef(false);
@@ -69,16 +69,13 @@ function useCachePrefetch(
     const element = elementRef.current;
     if (!onVisible || !element) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            void prefetch();
-          }
-        });
-      },
-      { threshold }
-    );
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          void prefetch();
+        }
+      });
+    }, { threshold });
 
     observer.observe(element);
 
@@ -89,3 +86,4 @@ function useCachePrefetch(
 }
 
 export default useCachePrefetch;
+
