@@ -5,6 +5,19 @@
 
 A collection of custom React hooks built from the [react.gg](https://react.gg) course and personal utilities.
 
+## 🎮 Interactive Playground
+
+**Try all hooks live in your browser!**
+
+Visit the [Interactive Playground](https://m-de-graaff.github.io/react-hooks/) to:
+- 📚 Browse all available hooks
+- 💻 See live, editable demos
+- 🔧 Experiment with code in real-time
+- 📖 View source code and documentation
+- 🚀 No installation required - runs entirely in your browser
+
+The playground is built with `react-live` and deployed on GitHub Pages - completely static, no backend required!
+
 ## Installation
 
 ```bash
@@ -499,6 +512,32 @@ src/
 ├── hooks/          # Custom hooks implementations
 │   └── index.ts    # Export all hooks
 └── index.ts        # Main entry point
+
+playground/         # Interactive playground app
+├── src/
+│   ├── components/ # React components
+│   └── hooksData.ts # Hook examples and metadata
+└── package.json    # Playground dependencies
+```
+
+### Running the Playground Locally
+
+To run the interactive playground locally:
+
+```bash
+cd playground
+pnpm install
+pnpm dev
+```
+
+The playground will be available at `http://localhost:5173`
+
+To build and deploy the playground:
+
+```bash
+cd playground
+pnpm build
+pnpm deploy
 ```
 
 ## Contributing

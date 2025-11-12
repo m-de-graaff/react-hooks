@@ -20,7 +20,7 @@ type EventTarget =
  * useEventListener(window, 'resize', (event) => {
  *   console.log('Window resized', event);
  * });
- * 
+ *
  * const buttonRef = useRef<HTMLButtonElement>(null);
  * useEventListener(buttonRef, 'click', (event) => {
  *   console.log('Button clicked', event);
@@ -39,20 +39,12 @@ function useEventListener<T extends EventTarget>(
 
     // Determine the actual element (handle refs and direct elements)
     const rawElement =
-      typeof target === 'function'
-        ? target()
-        : 'current' in target
-          ? target.current
-          : target;
+      typeof target === 'function' ? target() : 'current' in target ? target.current : target;
 
     if (!rawElement) return;
 
     // Type guard to ensure element has addEventListener
-    const element = rawElement as
-      | HTMLElement
-      | Window
-      | Document
-      | MediaQueryList;
+    const element = rawElement as HTMLElement | Window | Document | MediaQueryList;
 
     if (typeof element.addEventListener !== 'function') return;
 

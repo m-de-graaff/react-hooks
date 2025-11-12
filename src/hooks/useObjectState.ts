@@ -7,7 +7,7 @@ function isPlainObject(value: unknown): value is Record<string, unknown> {
 
 type UseObjectStateReturn<T extends Record<string, unknown>> = readonly [
   T,
-  (value: Partial<T> | ((prev: T) => Partial<T>)) => void
+  (value: Partial<T> | ((prev: T) => Partial<T>)) => void,
 ];
 
 /**
@@ -24,20 +24,17 @@ function useObjectState<T extends Record<string, unknown>>(
 ): UseObjectStateReturn<T> {
   const [state, setState] = useState<T>(initialValue);
 
-  const updateState = useCallback(
-    (value: Partial<T> | ((prev: T) => Partial<T>)): void => {
-      setState((prev) => {
-        const nextValue = typeof value === 'function' ? value(prev) : value;
+  const updateState = useCallback((value: Partial<T> | ((prev: T) => Partial<T>)): void => {
+    setState((prev) => {
+      const nextValue = typeof value === 'function' ? value(prev) : value;
 
-        // Ignore non-plain objects
-        if (!isPlainObject(nextValue)) return prev;
+      // Ignore non-plain objects
+      if (!isPlainObject(nextValue)) return prev;
 
-        // Merge new values with previous state
-        return { ...prev, ...nextValue };
-      });
-    },
-    []
-  );
+      // Merge new values with previous state
+      return { ...prev, ...nextValue };
+    });
+  }, []);
 
   return [state, updateState] as const;
 }

@@ -34,10 +34,7 @@ function listReducer<T>(state: T[], action: ListAction<T>): T[] {
       return next;
     }
     case 'updateAt': {
-      if (
-        action.payload.index < 0 ||
-        action.payload.index >= state.length
-      ) {
+      if (action.payload.index < 0 || action.payload.index >= state.length) {
         return state;
       }
       const next = [...state];
@@ -73,12 +70,9 @@ function useList<T>(defaultList: T[] = []): UseListReturn<T> {
     });
   }, []);
 
-  const push = useCallback(
-    (...items: T[]): void => {
-      dispatch({ type: 'push', payload: items });
-    },
-    []
-  );
+  const push = useCallback((...items: T[]): void => {
+    dispatch({ type: 'push', payload: items });
+  }, []);
 
   const removeAt = useCallback((index: number): void => {
     dispatch({ type: 'removeAt', payload: index });

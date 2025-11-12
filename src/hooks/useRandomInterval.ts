@@ -22,10 +22,7 @@ function getRandomNumber(min: number, max: number): number {
  * // Clear the interval manually if needed
  * clearInterval();
  */
-function useRandomInterval(
-  cb: () => void,
-  options: UseRandomIntervalOptions
-): () => void {
+function useRandomInterval(cb: () => void, options: UseRandomIntervalOptions): () => void {
   const { minDelay, maxDelay } = options;
   const timeoutIdRef = useRef<NodeJS.Timeout | null>(null);
   const onInterval = useEffectEvent(cb);

@@ -23,10 +23,7 @@ interface UseHistoryStateReturn<T> {
   clear: () => void;
 }
 
-function historyReducer<T>(
-  state: HistoryState<T>,
-  action: HistoryAction<T>
-): HistoryState<T> {
+function historyReducer<T>(state: HistoryState<T>, action: HistoryAction<T>): HistoryState<T> {
   const { past, present, future } = state;
 
   switch (action.type) {
@@ -87,9 +84,7 @@ function historyReducer<T>(
  * redo(); // Goes forward to 2
  * clear(); // Resets to initial value (0)
  */
-function useHistoryState<T>(
-  initialPresent: T | null = null
-): UseHistoryStateReturn<T> {
+function useHistoryState<T>(initialPresent: T | null = null): UseHistoryStateReturn<T> {
   const [state, dispatch] = useReducer(historyReducer<T>, {
     past: [],
     present: initialPresent,
@@ -99,12 +94,9 @@ function useHistoryState<T>(
   const canUndo = useMemo(() => state.past.length > 0, [state.past.length]);
   const canRedo = useMemo(() => state.future.length > 0, [state.future.length]);
 
-  const set = useCallback(
-    (newPresent: T): void => {
-      dispatch({ type: 'SET', newPresent });
-    },
-    []
-  );
+  const set = useCallback((newPresent: T): void => {
+    dispatch({ type: 'SET', newPresent });
+  }, []);
 
   const undo = useCallback((): void => {
     dispatch({ type: 'UNDO' });

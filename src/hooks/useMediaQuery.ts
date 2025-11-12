@@ -38,10 +38,7 @@ function subscribe(query: string): (callback: () => void) => () => void {
  * // Returns true when the media query matches
  */
 function useMediaQuery(query: string): boolean {
-  return useSyncExternalStore(
-    subscribe(query),
-    () => snapshot(query)
-  );
+  return useSyncExternalStore(subscribe(query), () => snapshot(query));
 }
 
 export default useMediaQuery;

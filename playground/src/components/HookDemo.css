@@ -1,0 +1,141 @@
+.hook-demo {
+  max-width: 100%;
+}
+
+.hook-demo-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.back-button {
+  padding: 0.5rem 1rem;
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9375rem;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.back-button:hover {
+  background: #e9ecef;
+  color: #333;
+}
+
+.hook-demo-title {
+  flex: 1;
+}
+
+.hook-demo-title h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-family: "Fira Code", "Courier New", monospace;
+}
+
+.hook-demo-description {
+  color: #666;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.source-button {
+  padding: 0.5rem 1rem;
+  background: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.source-button:hover {
+  background: #0056b3;
+}
+
+.hook-demo-content {
+  margin-bottom: 3rem;
+}
+
+.hook-demo-install {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.hook-demo-install h3 {
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+  color: #333;
+}
+
+.hook-demo-install h3:not(:first-child) {
+  margin-top: 1.5rem;
+}
+
+.install-code {
+  display: block;
+  padding: 0.75rem 1rem;
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-family: "Fira Code", "Courier New", monospace;
+  font-size: 0.9375rem;
+  color: #333;
+  overflow-x: auto;
+  margin-bottom: 0.5rem;
+}
+
+.hook-demo-error {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.hook-demo-error h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.hook-demo-error p {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.hook-demo-error a {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.hook-demo-error a:hover {
+  background: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .hook-demo-header {
+    flex-direction: column;
+  }
+
+  .hook-demo-title h1 {
+    font-size: 1.5rem;
+  }
+
+  .source-button {
+    width: 100%;
+    text-align: center;
+  }
+}
