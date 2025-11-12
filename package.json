@@ -1,6 +1,6 @@
 {
   "name": "@m-de-graaff/react-hooks",
-  "version": "1.0.2-next",
+  "version": "1.0.3-next",
   "description": "Custom React hooks collection from react.gg course and personal utilities",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
