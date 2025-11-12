@@ -101,7 +101,7 @@ a {
 }
 
 a:hover {
-  color: var(--primary-foreground);
+  color: var(--primary);
 }
 
 /* Buttons / Interactive */

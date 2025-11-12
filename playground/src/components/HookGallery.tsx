@@ -21,7 +21,7 @@ export default function HookGallery() {
             </div>
             <p className="hook-card-description">{hook.description}</p>
             <div className="hook-card-footer">
-              <span className="hook-card-badge">Try it →</span>
+              <span className="hook-card-badge">Try it</span>
             </div>
           </Link>
         ))}

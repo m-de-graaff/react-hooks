@@ -5,16 +5,16 @@
 
 A collection of custom React hooks built from the [react.gg](https://react.gg) course and personal utilities.
 
-## 🎮 Interactive Playground
+## Interactive Playground
 
 **Try all hooks live in your browser!**
 
 Visit the [Interactive Playground](https://m-de-graaff.github.io/react-hooks/) to:
-- 📚 Browse all available hooks
-- 💻 See live, editable demos
-- 🔧 Experiment with code in real-time
-- 📖 View source code and documentation
-- 🚀 No installation required - runs entirely in your browser
+- Browse all available hooks
+- See live, editable demos
+- Experiment with code in real-time
+- View source code and documentation
+- No installation required - runs entirely in your browser
 
 The playground is built with `react-live` and deployed on GitHub Pages - completely static, no backend required!
 
