@@ -1,71 +1,127 @@
 .playground {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  gap: 1.5rem;
   margin: 2rem 0;
-  border-radius: 8px;
+  border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .playground-editor,
 .playground-preview {
   display: flex;
   flex-direction: column;
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
   overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 .playground-editor-header,
 .playground-preview-header {
-  background: #f8f9fa;
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid #e0e0e0;
+  background: hsl(var(--muted));
+  padding: 0.875rem 1.25rem;
+  border-bottom: 1px solid hsl(var(--border));
   font-weight: 600;
-  font-size: 0.875rem;
-  color: #666;
+  font-size: 0.8125rem;
+  color: hsl(var(--muted-foreground));
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.playground-editor-header::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: hsl(217 91% 60%);
+  box-shadow: 0 0 0 2px hsl(var(--muted));
+}
+
+.playground-preview-header::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: hsl(142 76% 36%);
+  box-shadow: 0 0 0 2px hsl(var(--muted));
 }
 
 .playground-editor-content {
   flex: 1;
-  min-height: 400px;
+  min-height: 500px;
   font-family: "Fira Code", "Courier New", monospace;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.6;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+.playground-editor-content textarea {
+  background: transparent !important;
+  color: hsl(var(--foreground)) !important;
+  caret-color: hsl(217 91% 60%);
+}
+
+.playground-editor-content textarea:focus {
+  outline: none;
+}
+
+/* Override react-live styles for dark theme */
+.playground-editor-content pre {
+  background: hsl(var(--background)) !important;
+  color: hsl(var(--foreground)) !important;
+  padding: 1.25rem !important;
+  margin: 0 !important;
+}
+
+.playground-editor-content pre code {
+  background: transparent !important;
+  color: hsl(var(--foreground)) !important;
 }
 
 .playground-preview-content {
   flex: 1;
-  padding: 1.5rem;
-  min-height: 400px;
+  padding: 2rem;
+  min-height: 500px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
 }
 
 .playground-error {
   margin-top: 1rem;
-  padding: 0.75rem;
-  background: #fee;
-  border: 1px solid #fcc;
-  border-radius: 4px;
-  color: #c33;
+  padding: 1rem;
+  background: hsl(var(--destructive) / 0.1);
+  border: 1px solid hsl(var(--destructive) / 0.3);
+  border-radius: calc(var(--radius) - 2px);
+  color: hsl(var(--destructive-foreground));
   font-family: "Fira Code", "Courier New", monospace;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   white-space: pre-wrap;
   word-break: break-word;
+  width: 100%;
 }
 
 @media (max-width: 968px) {
   .playground {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
   .playground-editor-content,
   .playground-preview-content {
-    min-height: 300px;
+    min-height: 400px;
+  }
+
+  .playground-preview-content {
+    padding: 1.5rem;
   }
 }

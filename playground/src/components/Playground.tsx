@@ -46,6 +46,52 @@ import {
 } from '../../../src/hooks';
 import './Playground.css';
 
+const editorTheme = {
+  plain: {
+    color: 'hsl(0 0% 98%)',
+    backgroundColor: 'hsl(0 0% 3.9%)',
+  },
+  styles: [
+    {
+      types: ['comment'],
+      style: {
+        color: 'hsl(0 0% 63.9%)',
+        fontStyle: 'italic',
+      },
+    },
+    {
+      types: ['string', 'attr-value'],
+      style: {
+        color: 'hsl(142 76% 36%)',
+      },
+    },
+    {
+      types: ['number', 'boolean'],
+      style: {
+        color: 'hsl(217 91% 60%)',
+      },
+    },
+    {
+      types: ['keyword', 'operator'],
+      style: {
+        color: 'hsl(262 83% 58%)',
+      },
+    },
+    {
+      types: ['function'],
+      style: {
+        color: 'hsl(217 91% 60%)',
+      },
+    },
+    {
+      types: ['punctuation'],
+      style: {
+        color: 'hsl(0 0% 98%)',
+      },
+    },
+  ],
+};
+
 interface PlaygroundProps {
   code: string;
   scope?: Record<string, unknown>;
@@ -99,7 +145,7 @@ export default function Playground({ code, scope = {} }: PlaygroundProps) {
   };
 
   return (
-    <LiveProvider code={code} scope={defaultScope}>
+    <LiveProvider code={code} scope={defaultScope} theme={editorTheme}>
       <div className="playground">
         <div className="playground-editor">
           <div className="playground-editor-header">
