@@ -64,7 +64,7 @@ jobs:
           body_path: CHANGELOG.txt
           draft: false
           prerelease: false
-          overwrite: true
+          overwrite_files: true
           files: |
             dist/**/*
         env:
