@@ -169,6 +169,303 @@ function MyComponent() {
 }
 ```
 
+### `useContinuousRetry`
+
+Continuously retry a callback function at a specified interval until it succeeds or max retries is reached.
+
+```typescript
+import { useContinuousRetry } from "@m-de-graaff/react-hooks";
+
+function MyComponent() {
+  const hasResolved = useContinuousRetry(() => {
+    return document.getElementById('my-element') !== null;
+  }, 100, { maxRetries: 50 });
+  // Retries every 100ms until element exists or 50 retries reached
+
+  return <div>{hasResolved ? "Element found!" : "Searching..."}</div>;
+}
+```
+
+### `useCounter`
+
+Manage a counter with optional min/max bounds.
+
+```typescript
+import { useCounter } from "@m-de-graaff/react-hooks";
+
+function MyComponent() {
+  const [count, { increment, decrement, set, reset }] = useCounter(0, { min: 0, max: 10 });
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>Increment</button>
+      <button onClick={decrement}>Decrement</button>
+      <button onClick={() => set(5)}>Set to 5</button>
+      <button onClick={reset}>Reset</button>
+    </div>
+  );
+}
+```
+
+### `useDebounce`
+
+Debounce a value - returns the value only after it hasn't changed for the specified delay.
+
+```typescript
+import { useState } from "react";
+import { useDebounce } from "@m-de-graaff/react-hooks";
+
+function MyComponent() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  // debouncedSearchTerm will only update 500ms after searchTerm stops changing
+
+  return (
+    <input
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      placeholder="Search..."
+    />
+  );
+}
+```
+
+### `useEventListener`
+
+Add an event listener to a DOM element, window, or document.
+
+```typescript
+import { useRef } from "react";
+import { useEventListener } from "@m-de-graaff/react-hooks";
+
+function MyComponent() {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEventListener(window, 'resize', (event) => {
+    console.log('Window resized', event);
+  });
+
+  useEventListener(buttonRef, 'click', (event) => {
+    console.log('Button clicked', event);
+  });
+
+  return <button ref={buttonRef}>Click me</button>;
+}
+```
+
+### `useHistoryState`
+
+Manage state with undo/redo history.
+
+```typescript
+import { useHistoryState } from "@m-de-graaff/react-hooks";
+
+function MyComponent() {
+  const { state, canUndo, canRedo, set, undo, redo, clear } = useHistoryState(0);
+
+  return (
+    <div>
+      <p>Value: {state}</p>
+      <button onClick={() => set((state ?? 0) + 1)}>Increment</button>
+      <button onClick={undo} disabled={!canUndo}>Undo</button>
+      <button onClick={redo} disabled={!canRedo}>Redo</button>
+      <button onClick={clear}>Clear</button>
+    </div>
+  );
+}
+```
+
+### `useInterval`
+
+Run a callback function at a specified interval.
+
+```typescript
+import { useInterval } from "@m-de-graaff/react-hooks";
+
+function MyComponent() {
+  const clearInterval = useInterval(() => {
+    console.log("Tick");
+  }, 1000);
+  // Clear the interval manually if needed: clearInterval();
+
+  return <div>Check console for ticks</div>;
+}
+```
+
+### `useList`
+
+Manage a list/array with various operations.
+
+```typescript
+import { useList } from "@m-de-graaff/react-hooks";
+
+function MyComponent() {
+  const [list, { set, push, removeAt, insertAt, updateAt, clear }] = useList([1, 2, 3]);
+
+  return (
+    <div>
+      <p>List: {list.join(', ')}</p>
+      <button onClick={() => push(4, 5)}>Add 4, 5</button>
+      <button onClick={() => removeAt(0)}>Remove First</button>
+      <button onClick={() => insertAt(1, 99)}>Insert 99 at index 1</button>
+      <button onClick={() => updateAt(0, 100)}>Update first to 100</button>
+      <button onClick={clear}>Clear</button>
+    </div>
+  );
+}
+```
+
+### `useLockBodyScroll`
+
+Lock body scroll (prevent scrolling).
+
+```typescript
+import { useLockBodyScroll } from "@m-de-graaff/react-hooks";
+
+function Modal({ isOpen }: { isOpen: boolean }) {
+  if (isOpen) {
+    useLockBodyScroll();
+  }
+  // Scroll is automatically restored when component unmounts
+
+  return isOpen ? <div>Modal content</div> : null;
+}
+```
+
+### `useMediaQuery`
+
+Track a media query match state.
+
+```typescript
+import { useMediaQuery } from "@m-de-graaff/react-hooks";
+
+function MyComponent() {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
+  return (
+    <div>
+      <p>Device: {isMobile ? "Mobile" : "Desktop"}</p>
+      <p>Theme: {isDarkMode ? "Dark" : "Light"}</p>
+    </div>
+  );
+}
+```
+
+### `useObjectState`
+
+Manage object state with automatic merging (similar to React class component setState).
+
+```typescript
+import { useObjectState } from "@m-de-graaff/react-hooks";
+
+function MyComponent() {
+  const [state, updateState] = useObjectState({ name: 'John', age: 30 });
+
+  return (
+    <div>
+      <p>Name: {state.name}, Age: {state.age}</p>
+      <button onClick={() => updateState({ age: 31 })}>
+        Update Age
+      </button>
+      <button onClick={() => updateState((prev) => ({ age: (prev.age ?? 0) + 1 }))}>
+        Increment Age
+      </button>
+    </div>
+  );
+}
+```
+
+### `useQueue`
+
+Manage a queue data structure.
+
+```typescript
+import { useQueue } from "@m-de-graaff/react-hooks";
+
+function MyComponent() {
+  const { add, remove, clear, first, last, size, queue } = useQueue([1, 2, 3]);
+
+  return (
+    <div>
+      <p>Queue: {queue.join(', ')}</p>
+      <p>First: {first ?? 'N/A'}, Last: {last ?? 'N/A'}, Size: {size}</p>
+      <button onClick={() => add(4)}>Add 4</button>
+      <button onClick={() => remove()}>Remove First</button>
+      <button onClick={clear}>Clear</button>
+    </div>
+  );
+}
+```
+
+### `useRandomInterval`
+
+Run a callback function at random intervals between minDelay and maxDelay.
+
+```typescript
+import { useRandomInterval } from "@m-de-graaff/react-hooks";
+
+function MyComponent() {
+  const clearInterval = useRandomInterval(() => {
+    console.log("Random tick");
+  }, { minDelay: 1000, maxDelay: 5000 });
+  // Clear the interval manually if needed: clearInterval();
+
+  return <div>Check console for random ticks</div>;
+}
+```
+
+### `useTimeout`
+
+Run a callback function after a specified delay.
+
+```typescript
+import { useTimeout } from "@m-de-graaff/react-hooks";
+
+function MyComponent() {
+  const clearTimeout = useTimeout(() => {
+    console.log("Timeout fired!");
+  }, 1000);
+  // Clear the timeout manually if needed: clearTimeout();
+
+  return <div>Check console after 1 second</div>;
+}
+```
+
+### `useVisibilityChange`
+
+Track document visibility state.
+
+```typescript
+import { useVisibilityChange } from "@m-de-graaff/react-hooks";
+
+function MyComponent() {
+  const isVisible = useVisibilityChange();
+  // Returns true when tab/window is visible, false when hidden
+
+  return <div>Tab is {isVisible ? "visible" : "hidden"}</div>;
+}
+```
+
+### `useWindowSize`
+
+Track the window size.
+
+```typescript
+import { useWindowSize } from "@m-de-graaff/react-hooks";
+
+function MyComponent() {
+  const { width, height } = useWindowSize();
+
+  return (
+    <div>
+      <p>Window size: {width} x {height}</p>
+    </div>
+  );
+}
+```
+
 ## Development
 
 ### Prerequisites
