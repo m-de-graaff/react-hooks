@@ -1,10 +1,7 @@
-"use client"
-import { useCallback, useState } from "react";
+'use client';
+import { useCallback, useState } from 'react';
 
-type UseToggleReturn = readonly [
-    boolean,
-    (value?: boolean) => void
-];
+type UseToggleReturn = readonly [boolean, (value?: boolean) => void];
 
 /**
  * Hook to toggle a boolean value
@@ -18,17 +15,17 @@ type UseToggleReturn = readonly [
  * toggle("test") // Sets to true
  */
 function useToggle(initialValue: boolean = false): UseToggleReturn {
-    const [isToggled, setIsToggled] = useState<boolean>(initialValue);
+  const [isToggled, setIsToggled] = useState<boolean>(initialValue);
 
-    const toggle = useCallback((value?: boolean): void => {
-        if (value === undefined) {
-            setIsToggled((prev) => !prev);
-        } else {
-            setIsToggled(value);
-        }
-    }, []);
+  const toggle = useCallback((value?: boolean): void => {
+    if (value === undefined) {
+      setIsToggled((prev) => !prev);
+    } else {
+      setIsToggled(value);
+    }
+  }, []);
 
-    return [isToggled, toggle] as const;
+  return [isToggled, toggle] as const;
 }
 
 export default useToggle;

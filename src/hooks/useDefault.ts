@@ -1,9 +1,9 @@
-"use client"
-import { useCallback, useEffect, useState } from "react"
+'use client';
+import { useCallback, useEffect, useState } from 'react';
 
 interface UseDefaultOptions<T> {
-    initialValue: T | null | undefined;
-    defaultValue: T;
+  initialValue: T | null | undefined;
+  defaultValue: T;
 }
 
 type UseDefaultReturn<T> = readonly [T, (value: T) => void];
@@ -20,21 +20,21 @@ type UseDefaultReturn<T> = readonly [T, (value: T) => void];
  * };
  */
 function useDefault<T>({ initialValue, defaultValue }: UseDefaultOptions<T>): UseDefaultReturn<T> {
-    const [value, setValue] = useState<T>(() => {
-        return initialValue ?? defaultValue;
-    });
+  const [value, setValue] = useState<T>(() => {
+    return initialValue ?? defaultValue;
+  });
 
-    useEffect(() => {
-        if (value === undefined || value === null) {
-            setValue(defaultValue);
-        }
-    }, [value, defaultValue]);
+  useEffect(() => {
+    if (value === undefined || value === null) {
+      setValue(defaultValue);
+    }
+  }, [value, defaultValue]);
 
-    const updateValue = useCallback((newValue: T) => {
-        setValue(newValue);
-    }, []);
+  const updateValue = useCallback((newValue: T) => {
+    setValue(newValue);
+  }, []);
 
-    return [value, updateValue] as const;
+  return [value, updateValue] as const;
 }
 
 export default useDefault;

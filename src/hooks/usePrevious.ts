@@ -1,5 +1,5 @@
-"use client"
-import { useEffect, useRef } from "react";
+'use client';
+import { useEffect, useRef } from 'react';
 
 /**
  * Hook to get the previous value of a variable
@@ -11,13 +11,13 @@ import { useEffect, useRef } from "react";
  * // previousCount will be the value of count from the previous render
  */
 function usePrevious<T>(item: T): T | undefined {
-    const previous = useRef<T | undefined>(undefined);
+  const previous = useRef<T | undefined>(undefined);
 
-    useEffect(() => {
-        previous.current = item;
-    }, [item]);
+  useEffect(() => {
+    previous.current = item;
+  }, [item]);
 
-    return previous.current;
+  return previous.current;
 }
 
 export default usePrevious;

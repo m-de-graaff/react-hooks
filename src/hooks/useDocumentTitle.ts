@@ -1,5 +1,5 @@
-"use client"
-import { useEffect } from "react";
+'use client';
+import { useEffect } from 'react';
 
 /**
  * Hook to set the document title
@@ -12,14 +12,14 @@ import { useEffect } from "react";
  * };
  */
 function useDocumentTitle(title: string): void {
-    useEffect(() => {
-        const previousTitle = document.title;
-        document.title = title;
+  useEffect(() => {
+    const previousTitle = document.title;
+    document.title = title;
 
-        return () => {
-            document.title = previousTitle;
-        };
-    }, [title]);
+    return () => {
+      document.title = previousTitle;
+    };
+  }, [title]);
 }
 
 export default useDocumentTitle;

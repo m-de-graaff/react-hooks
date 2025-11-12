@@ -1,5 +1,5 @@
-"use client"
-import { useEffect, useRef, useEffectEvent } from "react";
+'use client';
+import { useEffect, useEffectEvent, useRef } from 'react';
 
 /**
  * Hook to run a callback function at a specified interval
@@ -14,30 +14,30 @@ import { useEffect, useRef, useEffectEvent } from "react";
  * clearInterval();
  */
 function useInterval(cb: () => void, ms: number | null): () => void {
-    const onTick = useEffectEvent(cb);
-    const idRef = useRef<NodeJS.Timeout | null>(null);
+  const onTick = useEffectEvent(cb);
+  const idRef = useRef<NodeJS.Timeout | null>(null);
 
-    useEffect(() => {
-        if (ms === null) {
-            return;
-        }
+  useEffect(() => {
+    if (ms === null) {
+      return;
+    }
 
-        idRef.current = setInterval(() => {
-            onTick();
-        }, ms);
-
-        return () => {
-            if (idRef.current !== null) {
-                clearInterval(idRef.current);
-            }
-        };
-    }, [ms]);
+    idRef.current = setInterval(() => {
+      onTick();
+    }, ms);
 
     return () => {
-        if (idRef.current !== null) {
-            clearInterval(idRef.current);
-        }
+      if (idRef.current !== null) {
+        clearInterval(idRef.current);
+      }
     };
+  }, [ms]);
+
+  return () => {
+    if (idRef.current !== null) {
+      clearInterval(idRef.current);
+    }
+  };
 }
 
 export default useInterval;

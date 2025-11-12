@@ -1,5 +1,5 @@
-"use client"
-import { useEffect } from "react";
+'use client';
+import { useEffect } from 'react';
 
 /**
  * Hook to set the favicon of the document
@@ -12,16 +12,17 @@ import { useEffect } from "react";
  * };
  */
 function useFavicon(url: string): void {
-    useEffect(() => {
-        if (typeof window === "undefined") return;
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
 
-        const link = (window.document.querySelector("link[rel*='icon']") as HTMLLinkElement) ||
-            window.document.createElement("link") as HTMLLinkElement;
-        link.rel = "shortcut icon";
-        link.href = url;
+    const link =
+      (window.document.querySelector("link[rel*='icon']") as HTMLLinkElement) ||
+      (window.document.createElement('link') as HTMLLinkElement);
+    link.rel = 'shortcut icon';
+    link.href = url;
 
-        window.document.getElementsByTagName("head")[0].appendChild(link);
-    }, [url]);
+    window.document.getElementsByTagName('head')[0].appendChild(link);
+  }, [url]);
 }
 
 export default useFavicon;

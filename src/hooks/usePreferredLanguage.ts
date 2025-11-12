@@ -1,16 +1,16 @@
-"use client"
-import { useSyncExternalStore } from "react";
+'use client';
+import { useSyncExternalStore } from 'react';
 
 function snapshot(): string {
-    return navigator.language;
+  return navigator.language;
 }
 
 function subscribe(callback: () => void): () => void {
-    window.addEventListener("languagechange", callback);
+  window.addEventListener('languagechange', callback);
 
-    return () => {
-        window.removeEventListener("languagechange", callback);
-    };
+  return () => {
+    window.removeEventListener('languagechange', callback);
+  };
 }
 
 /**
@@ -21,10 +21,7 @@ function subscribe(callback: () => void): () => void {
  * // Returns the browser's preferred language
  */
 function usePreferredLanguage(): string {
-    return useSyncExternalStore(
-        subscribe,
-        snapshot
-    );
+  return useSyncExternalStore(subscribe, snapshot);
 }
 
 export default usePreferredLanguage;
