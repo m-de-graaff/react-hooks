@@ -34,6 +34,12 @@ yarn add @m-de-graaff/react-hooks
 pnpm add @m-de-graaff/react-hooks
 ```
 
+For the Next.js preview release you can pin the `next` dist-tag:
+
+```bash
+npm install @m-de-graaff/react-hooks@next
+```
+
 ## Usage
 
 ```typescript
@@ -51,7 +57,31 @@ function MyComponent() {
 }
 ```
 
+### Next.js Entry Point
+
+Starting with `1.0.0-next`, the package includes dedicated Next.js cache helpers under the `/next` subpath. These utilities are compiled for both Node/Edge runtimes and ship full type definitions.
+
+```typescript
+import {
+  nextCache,
+  useCacheStatus,
+  useCachePrefetch,
+  useCacheWarmup,
+} from "@m-de-graaff/react-hooks/next";
+
+export async function getPosts() {
+  "use cache";
+  const { revalidate } = nextCache({ tag: "posts", profile: "minutes" });
+  // ...load data...
+  await revalidate();
+}
+```
+
+Use these hooks and helpers in App Router projects running Next.js 16 or newer.
+
 ## Available Hooks
+
+The sections below cover the baseline browser-friendly utilities. Next.js-specific helpers (`useCacheStatus`, `useCachePrefetch`, `useCacheWarmup`, `nextCache`) are documented in the [Next.js Entry Point](#nextjs-entry-point) section above.
 
 ### `useCopyToClipboard`
 
@@ -509,15 +539,16 @@ npm run lint:fix
 
 ```
 src/
-├── hooks/          # Custom hooks implementations
-│   └── index.ts    # Export all hooks
-└── index.ts        # Main entry point
+├── hooks/            # Browser/runtime-agnostic hooks
+│   └── index.ts      # Export all baseline hooks
+├── next/             # Re-export Next.js-specific helpers
+└── index.ts          # Package entry point
 
-playground/         # Interactive playground app
+playground/           # Interactive playground app
 ├── src/
-│   ├── components/ # React components
-│   └── hooksData.ts # Hook examples and metadata
-└── package.json    # Playground dependencies
+│   ├── components/   # React components
+│   └── hooksData.ts  # Hook examples and metadata
+└── package.json      # Playground dependencies
 ```
 
 ### Running the Playground Locally
