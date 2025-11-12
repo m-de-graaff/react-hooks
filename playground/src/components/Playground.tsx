@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
+import type { PrismTheme } from 'prism-react-renderer';
 // Import hooks directly from source
 import {
   useBattery,
@@ -46,7 +47,7 @@ import {
 } from '../../../src/hooks';
 import './Playground.css';
 
-const editorTheme = {
+const editorTheme: PrismTheme = {
   plain: {
     color: 'hsl(0 0% 98%)',
     backgroundColor: 'hsl(0 0% 3.9%)',
@@ -56,7 +57,7 @@ const editorTheme = {
       types: ['comment'],
       style: {
         color: 'hsl(0 0% 63.9%)',
-        fontStyle: 'italic',
+        fontStyle: 'italic' as const,
       },
     },
     {
